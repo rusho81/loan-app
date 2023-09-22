@@ -16,6 +16,7 @@ class AdminController extends Controller
     function profile () {
         return view('admin.profile.view');
     }
+
     function updateProfile(Request $request) {
         $request->validate([
             'name' => ['required', 'max:100'],
@@ -40,9 +41,28 @@ class AdminController extends Controller
             $user->phone = $request->phone;
             $user->save();
 
+            toastr()->success('Profile has been updated successfully!', 'Congrats');
             return redirect()->back();
 
         }
 
+    }
+    
+    function updatePassword(){
+        return view('admin.password.view');
+    }
+
+    function storePassword(Request $request){
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required','confirmed', 'min:8']
+        ]);
+
+        $request->user()->update([
+            'password' => bcrypt($request->password)
+        ]);
+
+        toastr()->success('Password has been updated successfully!', 'Congrats');
+        return redirect()->back();
     }
 }
