@@ -24,4 +24,14 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         return view('admin.users.detail', compact('user'));
     }
+
+    function toggleRole(Request $request, $id) {
+        $user = User::findOrFail($id);
+        $user->role = ($request->has('role')) ? 'admin' : 'user';
+        $user->save();
+
+        toastr()->success('User role updated successfully!', 'Congrats');
+        return redirect()->back();
+
+    }
 }

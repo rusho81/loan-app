@@ -39,7 +39,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::post('/admin/store/password',[AdminController::class, 'storePassword'])->name('admin.password.store');
     Route::get('/admin/all/users',[UsersController::class, 'allUsers'])->name('admin.all.users');
     Route::delete('admin/delete/{user}', [UsersController::class, 'deleteUser'])->name('delete.user');
-    Route::delete('admin/user/detail/{user}', [UsersController::class, 'userDetail'])->name('user.detail');
+    Route::get('admin/user/detail/{user}', [UsersController::class, 'userDetail'])->name('user.detail');
+    Route::post('admin/user/{id}/toggle-user', [UsersController::class, 'toggleRole'])->name('user.toggle-role');
 });
 Route::middleware(['auth','role:user'])->group(function(){
     Route::get('/user/dashboard',[UserController::class, 'index'])->name('user.dashboard');
