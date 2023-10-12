@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css " rel="stylesheet">
 </head>
 <body>
     <div class="flex flex-col h-screen bg-gray-100">
@@ -29,6 +31,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
    
     <script>
         const profileButton = document.getElementById('profileButton');
@@ -63,6 +66,31 @@
 
             reader.readAsDataURL(file);
         }
+        }
+    </script>
+
+    <script>
+        function confirmDelete(userId){
+        Swal.fire({
+        title: 'Confirm Delete',
+        text: "Are you sure you want to delete the user?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-form'+userId).submit();
+
+            Swal.fire(
+            'Deleted!',
+            'User has been deleted.',
+            'success'
+            )
+        }
+        })
+
         }
     </script>
   

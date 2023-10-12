@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Admin\UsersController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\ProfileController;
@@ -36,6 +37,9 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::post('/admin/update/profile',[AdminController::class, 'updateProfile'])->name('admin.profile.update');
     Route::get('/admin/update/password',[AdminController::class, 'updatePassword'])->name('admin.password.update');
     Route::post('/admin/store/password',[AdminController::class, 'storePassword'])->name('admin.password.store');
+    Route::get('/admin/all/users',[UsersController::class, 'allUsers'])->name('admin.all.users');
+    Route::delete('admin/delete/{user}', [UsersController::class, 'deleteUser'])->name('delete.user');
+    Route::delete('admin/user/detail/{user}', [UsersController::class, 'userDetail'])->name('user.detail');
 });
 Route::middleware(['auth','role:user'])->group(function(){
     Route::get('/user/dashboard',[UserController::class, 'index'])->name('user.dashboard');
