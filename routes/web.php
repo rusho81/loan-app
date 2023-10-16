@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Admin\LoanTypesController;
 use App\Http\Controllers\Backend\Admin\UsersController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\UserController;
@@ -33,14 +34,21 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin/dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
+
     Route::get('/admin/profile',[AdminController::class, 'profile'])->name('admin.profile');
     Route::post('/admin/update/profile',[AdminController::class, 'updateProfile'])->name('admin.profile.update');
     Route::get('/admin/update/password',[AdminController::class, 'updatePassword'])->name('admin.password.update');
     Route::post('/admin/store/password',[AdminController::class, 'storePassword'])->name('admin.password.store');
+
     Route::get('/admin/all/users',[UsersController::class, 'allUsers'])->name('admin.all.users');
     Route::delete('admin/delete/{user}', [UsersController::class, 'deleteUser'])->name('delete.user');
     Route::get('admin/user/detail/{user}', [UsersController::class, 'userDetail'])->name('user.detail');
+
     Route::post('admin/user/{id}/toggle-user', [UsersController::class, 'toggleRole'])->name('user.toggle-role');
+    Route::post('admin/user/{id}/toggle-status', [UsersController::class, 'toggleStatus'])->name('user.toggle-status');
+
+    Route::get('/admin/all/loan/types',[LoanTypesController::class, 'allLoanTypes'])->name('admin.all.loan.types');
+    Route::post('/admin/add/loan_types',[LoanTypesController::class, 'addLoanTypes'])->name('admin.add.loan.types');
 });
 Route::middleware(['auth','role:user'])->group(function(){
     Route::get('/user/dashboard',[UserController::class, 'index'])->name('user.dashboard');

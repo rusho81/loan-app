@@ -32,6 +32,16 @@ class UsersController extends Controller
 
         toastr()->success('User role updated successfully!', 'Congrats');
         return redirect()->back();
-
     }
+
+    function toggleStatus(Request $request, $id) {
+        $user = User::findOrFail($id);
+        $user->status = ($request->has('status')) ? 'active' : 'inactive';
+        $user->save();
+
+        toastr()->success('User status updated successfully!', 'Congrats');
+        return redirect()->back();
+    }
+
+    
 }

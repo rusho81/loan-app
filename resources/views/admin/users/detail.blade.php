@@ -1,6 +1,51 @@
 @extends('admin.dashboard')
 
 @section('content')
+<style>
+    .switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 17px; /* Make the slider rounded */
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%; /* Make the circle rounded */
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+</style>
 
 <div class="p-6 mx-auto max-w-xl">
     <div class="bg-white shadow-md rounded-lg p-4">
@@ -12,9 +57,16 @@
                     <p class="text-gray-500">{{ $user->role }}</p>
                 </div>
             </div>
-            {{-- <div>
-                <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50">Edit Profile</button>
-            </div> --}}
+            <div>
+                <b>Change Status</b>
+                <form action="{{ route('user.toggle-status', $user->id) }}" method="POST">
+                    @csrf
+                    <label class="switch">
+                        <input type="checkbox" name="status" onchange="this.form.submit()" {{ ($user->status === 'active') ? 'checked':'' }}>
+                        <span class="slider"></span>
+                    </label>
+                  </form>
+            </div>
         </div>
         <hr class="my-4 border-t border-gray-300">
         <div>
