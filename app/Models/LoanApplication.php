@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class LoanApplication extends Model
 {
     use HasFactory;
+    protected $giarded = [];
     public function loan_type() {
         return $this-> belongsTo(LoanTypes::class);
     }

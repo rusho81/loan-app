@@ -49,6 +49,9 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
     Route::get('/admin/all/loan/types',[LoanTypesController::class, 'allLoanTypes'])->name('admin.all.loan.types');
     Route::post('/admin/add/loan_types',[LoanTypesController::class, 'addLoanTypes'])->name('admin.add.loan.types');
+    Route::delete('admin/delete/loan_type/{loan_type}', [LoanTypesController::class, 'deleteLoanType'])->name('user.loan_type');
+    Route::get('/admin/loan-types/{id}/edit',[LoanTypesController::class, 'editLoanTypes'])->name('admin.edit.loan.types');
+    Route::put('/admin/loan-types/{id}',[LoanTypesController::class, 'updateLoanTypes'])->name('admin.update.loan.types');
 });
 Route::middleware(['auth','role:user'])->group(function(){
     Route::get('/user/dashboard',[UserController::class, 'index'])->name('user.dashboard');

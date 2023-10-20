@@ -90,7 +90,30 @@
             )
         }
         })
+        }
+    </script>
 
+    <script>
+        function confirmDeleteLoanType(ltId){
+        Swal.fire({
+        title: 'Confirm Delete',
+        text: "Are you sure you want to delete the loan type?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-form'+ltId).submit();
+
+            Swal.fire(
+            'Deleted!',
+            'User has been deleted.',
+            'success'
+            )
+        }
+        })
         }
     </script>
   

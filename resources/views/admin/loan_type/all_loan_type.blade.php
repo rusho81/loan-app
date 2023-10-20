@@ -27,13 +27,16 @@
             <tbody>
                 @foreach ($loan_type  as $key => $lt)
                     
-              
                 <tr>
                     <td class="px-4 py-2">{{ $key +1 }}</td>
                     <td class="px-4 py-2">{{ $lt->name }}</td>
                     <td class="px-4 py-2">
-                        <button class="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50">Update</button>
-                        <button class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50">Delete</button>
+                        <a href="{{ route('admin.edit.loan.types', $lt->id) }}" class="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50">Update</a>
+                        <button type="submit" onclick="confirmDeleteLoanType({{ $lt->id }})"  class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50">Delete</button>
+                        <form action="{{ route('user.loan_type', [$lt->id]) }}" method="POST" id="delete-form{{ $lt->id }}">
+                            @csrf
+                            @method('DELETE')
+                          </form>
                     </td>
                 </tr>
                 @endforeach
