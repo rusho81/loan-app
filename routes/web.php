@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Backend\Admin\LoanController;
 use App\Http\Controllers\Backend\Admin\LoanTypesController;
 use App\Http\Controllers\Backend\Admin\UsersController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Models\LoanApplication;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +54,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::delete('admin/delete/loan_type/{loan_type}', [LoanTypesController::class, 'deleteLoanType'])->name('user.loan_type');
     Route::get('/admin/loan-types/{id}/edit',[LoanTypesController::class, 'editLoanTypes'])->name('admin.edit.loan.types');
     Route::put('/admin/loan-types/{id}',[LoanTypesController::class, 'updateLoanTypes'])->name('admin.update.loan.types');
+
+    Route::get('/admin/all/loan/applications',[LoanController::class, 'allLoanApplications'])->name('admin.all.loan.applications');
 });
 Route::middleware(['auth','role:user'])->group(function(){
     Route::get('/user/dashboard',[UserController::class, 'index'])->name('user.dashboard');
@@ -59,6 +63,7 @@ Route::middleware(['auth','role:user'])->group(function(){
     Route::post('/user/update/profile',[UserController::class, 'updateProfile'])->name('user.profile.update');
     Route::get('/user/update/password',[UserController::class, 'updatePassword'])->name('user.password.update');
     Route::post('/user/store/password',[UserController::class, 'storePassword'])->name('user.password.store');
+    Route::get('/user/loan/application',[LoanController::class, 'loanApplication'])->name('user.loan.application');
 });
 
 require __DIR__.'/auth.php';
