@@ -67,4 +67,10 @@ class LoanController extends Controller
         toastr()->success('Loan status updated successfully!', 'Congrats');
         return redirect()->back();
     }
+
+    function approvedLoan() {
+        $email = auth()->user()->email;
+        $loan = DB::table('loan_applications')->where('email',$email)->where('status', 'approved')->get();
+        return view('user.loan_application.approved', compact('loan'));
+    }
 }

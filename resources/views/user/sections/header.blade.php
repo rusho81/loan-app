@@ -1,9 +1,9 @@
 <header class="bg-gradient-to-r from-blue-500 to-indigo-700 px-6 py-3">
     <div class="flex items-center justify-between">
         <div class="flex items-center space-x-4">
-            <img src="#" alt="Logo" class="w-12 h-12 rounded-full">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-12 h-12 rounded-full">
             <div>
-                <h2 class="text-xl font-semibold text-white">Title of the programme</h2>
+                <h2 class="text-xl font-semibold text-white">Loan Manager</h2>
                
             </div>
         </div>
